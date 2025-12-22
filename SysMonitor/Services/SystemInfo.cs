@@ -75,6 +75,22 @@ namespace SystemMonitor.Services
         }
 
         //Get portion of memory usage
+        public static int GetMemoryUsagePercent()
+        {
+            // Get total memory and available memory
+            long totalMemorySize = GetTotalMemory();
+            long availableMemorySize = GetAvailableMemory();
+
+            // If total is 0, return 0 (no data)
+            if (totalMemorySize == 0)
+                return 0;
+
+            // Calculate how much memory is being used
+            long usedMemory = totalMemorySize - availableMemorySize;
+
+            // Return the percentage (0 to 100)
+            return (int)((usedMemory * 100) / totalMemorySize);
+        }
 
         //Get portion of CPU usage
 
