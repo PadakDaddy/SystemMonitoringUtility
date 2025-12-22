@@ -41,6 +41,38 @@ namespace SystemMonitor.Services
         }
 
         //Get available memory
+        public static long GetAvailableMemory()
+        {
+            try
+            {
+                // Open the operating system information
+                ManagementClass operatingSystemClass = new ManagementClass("Win32_OperatingSystem");
+
+                // Get all operating system information
+                ManagementObjectCollection osInstances = operatingSystemClass.GetInstances();
+
+                // Take the first operating system information
+                ManagementObject osObject = null;
+                foreach (ManagementObject instance in osInstances)
+                {
+                    osObject = instance;
+                    break;  // Stop after getting the first one
+                }
+
+                // If there is no information, return 0
+                if (osObject == null)
+                    return 0;
+
+                // Get free memory (it is in KB, so change to bytes)
+                string availableMemoryString = osObject["FreePhysicalMemory"].ToString();
+                return long.Parse(availableMemoryString) * 1024;  // 1 KB = 1024 bytes
+            }
+            catch
+            {
+                // If there is an error, return 0
+                return 0;
+            }
+        }
 
         //Get portion of memory usage
 
