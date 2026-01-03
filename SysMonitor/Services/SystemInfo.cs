@@ -93,6 +93,32 @@ namespace SystemMonitor.Services
         }
 
         //Get portion of CPU usage
+        public static int GetCpuUsagePercent()
+        {
+            try
+            {
+                // Make a new Performance Counter for CPU
+                PerformanceCounter cpuCounter = new PerformanceCounter(
+                    "Processor",
+                    "% Processor Time",
+                    "_Total"
+                );
+
+                // First read (this is not important, just to start)
+                cpuCounter.NextValue();
+
+                // Wait 100 milliseconds
+                System.Threading.Thread.Sleep(100);
+
+                // Second read (this is the real number)
+                return (int)cpuCounter.NextValue();
+            }
+            catch
+            {
+                // If there is an error, return 0
+                return 0;
+            }
+        }
 
         //Get windows version
     }
