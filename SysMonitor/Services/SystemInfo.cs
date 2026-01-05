@@ -120,6 +120,38 @@ namespace SystemMonitor.Services
             }
         }
 
-        //Get windows version
+        // Get Windows version
+        public static string GetWindowsVersion()
+        {
+            try
+            {
+                // Open the operating system information
+                ManagementClass operatingSystemClass = new ManagementClass("Win32_OperatingSystem");
+
+                // Get all operating system information
+                ManagementObjectCollection osInstances = operatingSystemClass.GetInstances();
+
+                // Take the first operating system information
+                ManagementObject osObject = null;
+                foreach (ManagementObject instance in osInstances)
+                {
+                    osObject = instance;
+                    break;  // Stop after getting the first one
+                }
+
+                // If there is no information, return "Unknown"
+                if (osObject == null)
+                    return "Unknown";
+
+                // Get the Windows version name and return
+                return osObject["Caption"].ToString();
+            }
+            catch
+            {
+                // If there is an error, return "Unknown"
+                return "Unknown";
+            }
+        }
+
     }
 }
