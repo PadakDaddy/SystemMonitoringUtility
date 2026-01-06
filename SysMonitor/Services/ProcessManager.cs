@@ -26,5 +26,14 @@ namespace SystemMonitor.Services
             //4. return list
             return processList;
         }
+
+        public static double GetProcessMemory(Process process)
+        {
+            //1. Get Process.WorkingSet
+
+            //2. convert byte to MB
+
+            //3. Return
+        }
     }
 }
