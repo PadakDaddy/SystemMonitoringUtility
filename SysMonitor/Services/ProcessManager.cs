@@ -30,10 +30,11 @@ namespace SystemMonitor.Services
         public static double GetProcessMemory(Process process)
         {
             //1. Get Process.WorkingSet
-
+            long memoryInBytes = process.WorkingSet;
             //2. convert byte to MB
-
+            double memoryInMB = memoryInBytes / 1024 / 1024;
             //3. Return
+            return memoryInMB;
         }
     }
 }
