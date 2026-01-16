@@ -58,8 +58,11 @@ namespace SystemMonitor.Services
             foreach (Process p in allProcesses)
             {
                 double currentMemory = GetProcessMemory(p);
-
-
+                if (currentMemory > highestMemory)
+                {
+                    highestMemory = currentMemory;
+                    highestProcess = p;
+                }
             }
             //return
             return highestProcess;
