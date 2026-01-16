@@ -45,5 +45,24 @@ namespace SystemMonitor.Services
             //3. Return
             return memoryInMB;
         }
+
+        public static Process GetHighestMemoryProcess()
+        {
+            //get all process
+            List<Process> allProcesses = GetAllProcesses();
+
+            //search highest memory process
+            double highestMemory = 0;
+            Process highestProcess = null;
+
+            foreach (Process p in allProcesses)
+            {
+                double currentMemory = GetProcessMemory(p);
+
+
+            }
+            //return
+            return highestProcess;
+        }
     }
 }
