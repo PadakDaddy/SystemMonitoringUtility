@@ -9,6 +9,10 @@ namespace SystemMonitor.Services
 {
     public class ProcessManager
     {
+        /// <summary>
+        /// Get all processes
+        /// </summary>
+        /// <returns></returns>
         public static List<Process> GetAllProcesses()
         {
             //1. create List
@@ -27,10 +31,15 @@ namespace SystemMonitor.Services
             return processList;
         }
 
+        /// <summary>
+        /// Get memory of specific process
+        /// </summary>
+        /// <param name="process"></param>
+        /// <returns></returns>
         public static double GetProcessMemory(Process process)
         {
             //1. Get Process.WorkingSet
-            long memoryInBytes = process.WorkingSet;
+            long memoryInBytes = process.WorkingSet64;
             //2. convert byte to MB
             double memoryInMB = memoryInBytes / 1024 / 1024;
             //3. Return
