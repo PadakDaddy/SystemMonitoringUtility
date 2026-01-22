@@ -20,6 +20,7 @@ namespace SystemMonitor.Views
         public MainWindow()
         {
             InitializeComponent();
+            SetupTimer();
         }
 
         private void SetupTimer()
@@ -36,6 +37,23 @@ namespace SystemMonitor.Views
             updateTimer.Start();
         }
                 
+        private async void UpdateTimer_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                //Get CPU(background)
+                int cpuUsage = await Task.Run(()=> SystemInfo.GetCpuUsagePercent());
+
+                //UI update
+                cpuProgressBar.Value = cpuUsage;
+                cpuLabel.Text = $"CPU: {cpuUsage}%";
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+            }
+        }
+
 
         private void systemInfoGB_Enter(object sender, EventArgs e)
         {
