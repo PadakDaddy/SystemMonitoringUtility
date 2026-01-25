@@ -153,5 +153,29 @@ namespace SystemMonitor.Services
             }
         }
 
+        public static int GetDiskUsagePercent()
+        {
+            try
+            {
+                //get disk information 
+                System.IO.DriveInfo drive = new System.IO.DriveInfo("C:\\");
+
+                //calculate total size, usage amount
+                long totalSize = drive.TotalSize;
+                long availableSpace = drive.AvailableFreeSpace;
+
+                //calculate percetage of usage portion
+                long usedSpace = totalSize - availableSpace;
+                int percent = (int)(usedSpace*100 / totalSize);
+
+                //return
+                return percent;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+
     }
 }
