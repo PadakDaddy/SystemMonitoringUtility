@@ -44,11 +44,14 @@ namespace SystemMonitor.Views
                 //Get CPU,Memory(background)
                 int cpuUsage = await Task.Run(()=> SystemInfo.GetCpuUsagePercent());
                 int memoryUsage = await Task.Run(()=> SystemInfo.GetMemoryUsagePercent());
+                int diskUsage = await Task.Run(()=> SystemInfo.GetCpuUsagePercent());
                 //UI update
                 cpuProgressBar.Value = cpuUsage;
                 cpuLabel.Text = $"CPU: {cpuUsage}%";
                 memoryProgressBar.Value = memoryUsage;
-                memoryLabel.Text = $"Memory: {memoryUsage} %";
+                memoryLabel.Text = $"Memory: {memoryUsage}%";
+                diskProgressBar.Value = diskUsage;
+                diskLabel.Text = $"Disk: {diskUsage}%";
             }
             catch(Exception ex)
             {
