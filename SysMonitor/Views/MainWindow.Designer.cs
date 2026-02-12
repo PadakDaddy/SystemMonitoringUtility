@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             this.systemInfoGroupBox = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.cpuProgressBar = new System.Windows.Forms.ProgressBar();
-            this.cpuLabel = new System.Windows.Forms.Label();
-            this.processDataGridView = new System.Windows.Forms.DataGridView();
-            this.label2 = new System.Windows.Forms.Label();
-            this.memoryProgressBar = new System.Windows.Forms.ProgressBar();
-            this.memoryLabel = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.diskProgressBar = new System.Windows.Forms.ProgressBar();
             this.diskLabel = new System.Windows.Forms.Label();
+            this.diskProgressBar = new System.Windows.Forms.ProgressBar();
+            this.label3 = new System.Windows.Forms.Label();
+            this.memoryLabel = new System.Windows.Forms.Label();
+            this.memoryProgressBar = new System.Windows.Forms.ProgressBar();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cpuLabel = new System.Windows.Forms.Label();
+            this.cpuProgressBar = new System.Windows.Forms.ProgressBar();
+            this.processDataGridView = new System.Windows.Forms.DataGridView();
             this.systemInfoGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.processDataGridView)).BeginInit();
             this.SuspendLayout();
@@ -62,56 +62,30 @@
             this.systemInfoGroupBox.Text = "System Information";
             this.systemInfoGroupBox.Enter += new System.EventHandler(this.systemInfoGB_Enter);
             // 
-            // label1
+            // diskLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(26, 47);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(54, 18);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "\"CPU\"";
+            this.diskLabel.AutoSize = true;
+            this.diskLabel.Location = new System.Drawing.Point(248, 116);
+            this.diskLabel.Name = "diskLabel";
+            this.diskLabel.Size = new System.Drawing.Size(89, 18);
+            this.diskLabel.TabIndex = 8;
+            this.diskLabel.Text = "\"Disk: 0%\"";
             // 
-            // cpuProgressBar
+            // diskProgressBar
             // 
-            this.cpuProgressBar.Location = new System.Drawing.Point(125, 47);
-            this.cpuProgressBar.Name = "cpuProgressBar";
-            this.cpuProgressBar.Size = new System.Drawing.Size(100, 23);
-            this.cpuProgressBar.TabIndex = 1;
+            this.diskProgressBar.Location = new System.Drawing.Point(125, 116);
+            this.diskProgressBar.Name = "diskProgressBar";
+            this.diskProgressBar.Size = new System.Drawing.Size(100, 23);
+            this.diskProgressBar.TabIndex = 7;
             // 
-            // cpuLabel
+            // label3
             // 
-            this.cpuLabel.AutoSize = true;
-            this.cpuLabel.Location = new System.Drawing.Point(248, 47);
-            this.cpuLabel.Name = "cpuLabel";
-            this.cpuLabel.Size = new System.Drawing.Size(90, 18);
-            this.cpuLabel.TabIndex = 2;
-            this.cpuLabel.Text = "\"CPU: 0%\"";
-            // 
-            // processDataGridView
-            // 
-            this.processDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.processDataGridView.Location = new System.Drawing.Point(12, 429);
-            this.processDataGridView.Name = "processDataGridView";
-            this.processDataGridView.RowHeadersWidth = 62;
-            this.processDataGridView.RowTemplate.Height = 30;
-            this.processDataGridView.Size = new System.Drawing.Size(731, 150);
-            this.processDataGridView.TabIndex = 3;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(26, 82);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(87, 18);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "\"Memory\"";
-            // 
-            // memoryProgressBar
-            // 
-            this.memoryProgressBar.Location = new System.Drawing.Point(125, 82);
-            this.memoryProgressBar.Name = "memoryProgressBar";
-            this.memoryProgressBar.Size = new System.Drawing.Size(100, 23);
-            this.memoryProgressBar.TabIndex = 4;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(26, 116);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(53, 18);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "\"Disk\"";
             // 
             // memoryLabel
             // 
@@ -123,30 +97,56 @@
             this.memoryLabel.Text = "\"Memory: 0%\"";
             this.memoryLabel.Click += new System.EventHandler(this.label3_Click);
             // 
-            // label3
+            // memoryProgressBar
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(26, 116);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 18);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "\"Disk\"";
+            this.memoryProgressBar.Location = new System.Drawing.Point(125, 82);
+            this.memoryProgressBar.Name = "memoryProgressBar";
+            this.memoryProgressBar.Size = new System.Drawing.Size(100, 23);
+            this.memoryProgressBar.TabIndex = 4;
             // 
-            // diskProgressBar
+            // label2
             // 
-            this.diskProgressBar.Location = new System.Drawing.Point(125, 116);
-            this.diskProgressBar.Name = "diskProgressBar";
-            this.diskProgressBar.Size = new System.Drawing.Size(100, 23);
-            this.diskProgressBar.TabIndex = 7;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(26, 82);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(87, 18);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "\"Memory\"";
             // 
-            // diskLabel
+            // label1
             // 
-            this.diskLabel.AutoSize = true;
-            this.diskLabel.Location = new System.Drawing.Point(248, 116);
-            this.diskLabel.Name = "diskLabel";
-            this.diskLabel.Size = new System.Drawing.Size(89, 18);
-            this.diskLabel.TabIndex = 8;
-            this.diskLabel.Text = "\"Disk: 0%\"";
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(26, 47);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(54, 18);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "\"CPU\"";
+            // 
+            // cpuLabel
+            // 
+            this.cpuLabel.AutoSize = true;
+            this.cpuLabel.Location = new System.Drawing.Point(248, 47);
+            this.cpuLabel.Name = "cpuLabel";
+            this.cpuLabel.Size = new System.Drawing.Size(90, 18);
+            this.cpuLabel.TabIndex = 2;
+            this.cpuLabel.Text = "\"CPU: 0%\"";
+            // 
+            // cpuProgressBar
+            // 
+            this.cpuProgressBar.Location = new System.Drawing.Point(125, 47);
+            this.cpuProgressBar.Name = "cpuProgressBar";
+            this.cpuProgressBar.Size = new System.Drawing.Size(100, 23);
+            this.cpuProgressBar.TabIndex = 1;
+            // 
+            // processDataGridView
+            // 
+            this.processDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.processDataGridView.Location = new System.Drawing.Point(12, 429);
+            this.processDataGridView.Name = "processDataGridView";
+            this.processDataGridView.RowHeadersWidth = 62;
+            this.processDataGridView.RowTemplate.Height = 30;
+            this.processDataGridView.Size = new System.Drawing.Size(731, 150);
+            this.processDataGridView.TabIndex = 3;
             // 
             // MainWindow
             // 
@@ -157,6 +157,7 @@
             this.Controls.Add(this.systemInfoGroupBox);
             this.Name = "MainWindow";
             this.Text = "MainWindow";
+            this.Load += new System.EventHandler(this.MainWindow_Load);
             this.systemInfoGroupBox.ResumeLayout(false);
             this.systemInfoGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.processDataGridView)).EndInit();

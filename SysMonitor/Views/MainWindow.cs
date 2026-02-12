@@ -44,12 +44,14 @@ namespace SystemMonitor.Views
                 //Get CPU,Memory(background)
                 int cpuUsage = await Task.Run(()=> SystemInfo.GetCpuUsagePercent());
                 int memoryUsage = await Task.Run(()=> SystemInfo.GetMemoryUsagePercent());
-                int diskUsage = await Task.Run(()=> SystemInfo.GetCpuUsagePercent());
+                int diskUsage = await Task.Run(()=> SystemInfo.GetDiskUsagePercent());
                 //UI update
                 cpuProgressBar.Value = cpuUsage;
                 cpuLabel.Text = $"CPU: {cpuUsage}%";
+
                 memoryProgressBar.Value = memoryUsage;
                 memoryLabel.Text = $"Memory: {memoryUsage}%";
+
                 diskProgressBar.Value = diskUsage;
                 diskLabel.Text = $"Disk: {diskUsage}%";
             }
@@ -71,6 +73,11 @@ namespace SystemMonitor.Views
         }
 
         private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MainWindow_Load(object sender, EventArgs e)
         {
 
         }
