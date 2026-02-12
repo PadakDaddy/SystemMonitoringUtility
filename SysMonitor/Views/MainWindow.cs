@@ -81,5 +81,10 @@ namespace SystemMonitor.Views
         {
 
         }
+
+        private void processDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

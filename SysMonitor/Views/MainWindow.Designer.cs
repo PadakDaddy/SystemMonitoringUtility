@@ -39,6 +39,8 @@
             this.cpuLabel = new System.Windows.Forms.Label();
             this.cpuProgressBar = new System.Windows.Forms.ProgressBar();
             this.processDataGridView = new System.Windows.Forms.DataGridView();
+            this.ProcessNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MemoryColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.systemInfoGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.processDataGridView)).BeginInit();
             this.SuspendLayout();
@@ -141,12 +143,30 @@
             // processDataGridView
             // 
             this.processDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.processDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ProcessNameColumn,
+            this.MemoryColumn});
             this.processDataGridView.Location = new System.Drawing.Point(12, 429);
             this.processDataGridView.Name = "processDataGridView";
             this.processDataGridView.RowHeadersWidth = 62;
             this.processDataGridView.RowTemplate.Height = 30;
             this.processDataGridView.Size = new System.Drawing.Size(731, 150);
             this.processDataGridView.TabIndex = 3;
+            this.processDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.processDataGridView_CellContentClick);
+            // 
+            // ProcessNameColumn
+            // 
+            this.ProcessNameColumn.HeaderText = "Process Name";
+            this.ProcessNameColumn.MinimumWidth = 8;
+            this.ProcessNameColumn.Name = "ProcessNameColumn";
+            this.ProcessNameColumn.Width = 150;
+            // 
+            // MemoryColumn
+            // 
+            this.MemoryColumn.HeaderText = "Memory (MB)";
+            this.MemoryColumn.MinimumWidth = 8;
+            this.MemoryColumn.Name = "MemoryColumn";
+            this.MemoryColumn.Width = 150;
             // 
             // MainWindow
             // 
@@ -178,5 +198,7 @@
         private System.Windows.Forms.Label diskLabel;
         private System.Windows.Forms.ProgressBar diskProgressBar;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProcessNameColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MemoryColumn;
     }
 }
