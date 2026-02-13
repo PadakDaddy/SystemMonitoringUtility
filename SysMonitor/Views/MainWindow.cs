@@ -39,6 +39,8 @@ namespace SystemMonitor.Views
                 
         private async void UpdateTimer_Tick(object sender, EventArgs e)
         {
+            await UpdateProcessList();
+
             try
             {
                 //Get CPU,Memory(background)
@@ -86,5 +88,27 @@ namespace SystemMonitor.Views
         {
 
         }
+
+        private async System.Threading.Tasks.Task UpdateProcessList()
+        {
+            // 1. Get all processes in background
+            List<Process> allProcesses = await System.Threading.Tasks.Task.Run(() =>
+                ProcessManager.GetAllProcesses()
+            );
+
+            // 2. Clear previous rows
+            processDataGridView.Rows.Clear();
+
+            // 3. Add each process as a row
+            foreach (Process p in allProcesses)
+            {
+                string name = p.ProcessName;
+                double memoryMb = p.WorkingSet64 / 1024.0 / 1024.0;
+                string memoryText = memoryMb.ToString("F1");
+
+                processDataGridView.Rows.Add(name, memoryText);
+            }
+        }
+
     }
 }
