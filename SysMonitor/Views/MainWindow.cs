@@ -39,6 +39,8 @@ namespace SystemMonitor.Views
                 
         private async void UpdateTimer_Tick(object sender, EventArgs e)
         {
+            await UpdateProcessList();
+
             try
             {
                 //Get CPU,Memory(background)
