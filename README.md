@@ -1,6 +1,7 @@
 # System Monitoring Utility
 
 A simple Windows desktop application that shows real-time information about your computer. Built with C# and Win32 API.
+It shows current CPU, memory, and disk usage and updates using tasks and threads.
 
 ## What It Does
 
