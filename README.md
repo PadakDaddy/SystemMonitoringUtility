@@ -14,3 +14,7 @@ This program shows:
 - **Disk Usage** - How much hard drive space you have
 - **Running Processes** - List of all programs running now
 - **System Information** - Your computer details (OS, RAM, processor)
+
+
+## Future
+User friendly UI
