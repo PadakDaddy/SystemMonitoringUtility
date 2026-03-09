@@ -11,6 +11,8 @@ namespace SystemMonitor
 {
     public partial class MainWindow : Window
     {
+        private readonly Dictionary<int, double> _prevCpuByPid = new();
+
         private readonly DispatcherTimer _timer;
 
         public MainWindow()
@@ -47,7 +49,6 @@ namespace SystemMonitor
                 MessageBox.Show($"Error: {ex.Message}");
             }
         }
-
         private async Task UpdateProcessList()
         {
             List<Process> allProcesses = await Task.Run(() =>
@@ -63,10 +64,11 @@ namespace SystemMonitor
             ProcessDataGrid.ItemsSource = items;
         }
     }
-
     public class ProcessViewItem
     {
         public string ProcessName { get; set; }
         public double MemoryMb { get; set; }
     }
+
+
 }
