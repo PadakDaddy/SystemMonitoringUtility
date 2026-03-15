@@ -147,5 +147,48 @@ namespace SystemMonitor.Services
             }
         }
 
+        private static string GetInstanceNameForPid(int pid)
+        {
+            var category = new PerformanceCounterCategory("Process");
+            string[] instances = category.GetInstanceNames();
+
+            foreach (string name in instances)
+            {
+                using (var cnt = new PerformanceCounter("Process", "ID Process", name, true))
+                {
+                    int val = (int)cnt.RawValue;
+                    if (val == pid)
+                        return name;
+                }
+            }
+
+            return "_Total";
+        }
+
+
+        public static double GetCpuUsagePercentForProcess(int pid)
+        {
+            try
+            {
+                using (var cpuCounter = new PerformanceCounter(
+                    "Process",
+                    "% Processor Time",
+                    GetInstanceNameForPid(pid),
+                    true))
+                {
+                    cpuCounter.NextValue();
+                    System.Threading.Thread.Sleep(100);
+                    double raw = cpuCounter.NextValue();
+
+                    int coreCount = Environment.ProcessorCount;
+                    return raw / coreCount;
+                }
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+
     }
 }
