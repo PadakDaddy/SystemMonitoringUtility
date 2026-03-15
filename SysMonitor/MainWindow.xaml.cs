@@ -68,6 +68,9 @@ namespace SystemMonitor
     {
         public string ProcessName { get; set; }
         public double MemoryMb { get; set; }
+        public int Pid { get; set; }          
+        public double CpuPercent { get; set; }   
+        public bool IsCpuSpike { get; set; }     
     }
 
 
