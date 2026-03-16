@@ -51,51 +51,49 @@ namespace SystemMonitor
         }
         private async Task UpdateProcessList()
         {
-            List<Process> allProcesses = await Task.Run(() =>
-                ProcessManager.GetAllProcesses()
-            );
-
-            var items = new List<ProcessViewItem>();
-
-            foreach (var p in allProcesses)
+            // execute every item in background
+            List<ProcessViewItem> items = await Task.Run(() =>
             {
-                int pid = p.Id;
+                List<Process> processes = ProcessManager.GetAllProcesses();
+                List<ProcessViewItem> result = new List<ProcessViewItem>();
 
-                // 1) current cpu
-                double currCpu = SystemInfo.GetCpuUsagePercentForProcess(pid); 
-
-                // 2) judge spike
-                bool isSpike = false;
-                if (_prevCpuByPid.TryGetValue(pid, out double prevCpu))
+                foreach (var p in processes)
                 {
-                    bool bigJump = (currCpu - prevCpu) >= 40.0;
-                    bool highEnough = currCpu >= 60.0;
-                    bool wasRunning = prevCpu >= 5.0;
+                    int pid = p.Id;
 
-                    if (bigJump && highEnough && wasRunning)
+                    double currCpu = SystemInfo.GetCpuUsagePercentForProcess(pid);
+
+                    bool isSpike = false;
+                    if (_prevCpuByPid.TryGetValue(pid, out double prevCpu))
                     {
-                        isSpike = true;
+                        bool bigJump = (currCpu - prevCpu) >= 40.0;
+                        bool highEnough = currCpu >= 60.0;
+                        bool wasRunning = prevCpu >= 5.0;
+
+                        if (bigJump && highEnough && wasRunning)
+                            isSpike = true;
+
+                        _prevCpuByPid[pid] = currCpu;
+                    }
+                    else
+                    {
+                        _prevCpuByPid[pid] = currCpu;
                     }
 
-                    _prevCpuByPid[pid] = currCpu;
-                }
-                else
-                {
-                    _prevCpuByPid[pid] = currCpu;
+                    double memMb = Math.Round(p.WorkingSet64 / 1024.0 / 1024.0, 1);
+
+                    result.Add(new ProcessViewItem
+                    {
+                        Pid = pid,
+                        ProcessName = p.ProcessName,
+                        MemoryMb = memMb,
+                        CpuPercent = Math.Round(currCpu, 1),
+                        IsCpuSpike = isSpike
+                    });
                 }
 
-                // 3) make item to binding
-                double memMb = Math.Round(p.WorkingSet64 / 1024.0 / 1024.0, 1);
-
-                items.Add(new ProcessViewItem
-                {
-                    Pid = pid,
-                    ProcessName = p.ProcessName,
-                    MemoryMb = memMb,
-                    CpuPercent = Math.Round(currCpu, 1),
-                    IsCpuSpike = isSpike
-                });
-            }
+                return result;
+            });
 
             ProcessDataGrid.ItemsSource = items;
         }
