@@ -42,15 +42,27 @@
 
         <!-- Process list -->
         <DataGrid x:Name="ProcessDataGrid"
-                  Grid.Row="1"
-                  AutoGenerateColumns="False"
-                  IsReadOnly="True"
-                  HeadersVisibility="Column"
-                  Margin="0">
+          Grid.Row="1"
+          AutoGenerateColumns="False"
+          IsReadOnly="True"
+          HeadersVisibility="Column"
+          Margin="0">
+            <DataGrid.Resources>
+                <Style TargetType="DataGridRow">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsCpuSpike}" Value="True">
+                            <Setter Property="Background" Value="LightCoral"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.Resources>
+
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Process Name" Binding="{Binding ProcessName}" Width="*"/>
-                <DataGridTextColumn Header="Memory (MB)" Binding="{Binding MemoryMb}" Width="150"/>
+                <DataGridTextColumn Header="Memory (MB)" Binding="{Binding MemoryMb}" Width="120"/>
+                <DataGridTextColumn Header="CPU (%)" Binding="{Binding CpuPercent}" Width="80"/>
             </DataGrid.Columns>
         </DataGrid>
+
     </Grid>
 </Window>
