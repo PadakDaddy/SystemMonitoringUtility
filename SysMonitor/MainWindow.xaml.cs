@@ -55,11 +55,47 @@ namespace SystemMonitor
                 ProcessManager.GetAllProcesses()
             );
 
-            var items = allProcesses.Select(p => new ProcessViewItem
+            var items = new List<ProcessViewItem>();
+
+            foreach (var p in allProcesses)
             {
-                ProcessName = p.ProcessName,
-                MemoryMb = Math.Round(p.WorkingSet64 / 1024.0 / 1024.0, 1)
-            }).ToList();
+                int pid = p.Id;
+
+                // 1) current cpu
+                double currCpu = SystemInfo.GetCpuUsagePercentForProcess(pid); 
+
+                // 2) judge spike
+                bool isSpike = false;
+                if (_prevCpuByPid.TryGetValue(pid, out double prevCpu))
+                {
+                    bool bigJump = (currCpu - prevCpu) >= 40.0;
+                    bool highEnough = currCpu >= 60.0;
+                    bool wasRunning = prevCpu >= 5.0;
+
+                    if (bigJump && highEnough && wasRunning)
+                    {
+                        isSpike = true;
+                    }
+
+                    _prevCpuByPid[pid] = currCpu;
+                }
+                else
+                {
+                    _prevCpuByPid[pid] = currCpu;
+                }
+
+                // 3) make item to binding
+                double memMb = Math.Round(p.WorkingSet64 / 1024.0 / 1024.0, 1);
+
+                items.Add(new ProcessViewItem
+                {
+                    Pid = pid,
+                    ProcessName = p.ProcessName,
+                    MemoryMb = memMb,
+                    CpuPercent = Math.Round(currCpu, 1),
+                    IsCpuSpike = isSpike
+                });
+            }
 
             ProcessDataGrid.ItemsSource = items;
         }
