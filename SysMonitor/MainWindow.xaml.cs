@@ -94,7 +94,7 @@ namespace SystemMonitor
 
                 return result;
             });
-
+            Title = $"System Monitor - {items.Count} processes";
             ProcessDataGrid.ItemsSource = items;
         }
     }
